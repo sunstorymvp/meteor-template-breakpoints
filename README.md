@@ -2,8 +2,8 @@
 Reactive template media breakpoints.
 
 Package provides `Template.mediaQueryBreakpoints` reactive variable which 
-contains hash `{ screensize: breakpoint }`. `breakpoint` is minimum value for
-a given screensize.
+contains hash `{ screensize: breakpoint }`. `breakpoint` is minimum viewport 
+width value in `px` for a given screensize.
 Defaults to [Foundation breakpoints](https://github.com/zurb/foundation-apps/blob/master/scss/helpers/_breakpoints.scss#L18-L24).
 
 ```javascript
@@ -45,6 +45,10 @@ Set your own breakpoints (must be inside `Meteor.startup` callback):
   {{else}}
     <p>Otherwise...</p>
   {{/if}}
+
+  {{#unless screensize 'large, xlarge'}}
+    ...
+  {{/unless}}
 ```
 
 `screensize` `Session` variable:
@@ -56,3 +60,10 @@ Set your own breakpoints (must be inside `Meteor.startup` callback):
     ...
   }
 ```
+
+**Important:** `Session.equals` only compares with single `screensize`.
+
+### Changelog
+
+* **26 Sep 2015**: Template helper now optionally accepts string with multiple
+`screensizes`, e.g.: `'large, xlarge'`.

@@ -28,5 +28,6 @@ Meteor.startup ->
       mediaQueryList.addListener listener
       initializedQueries.push mediaQueryList: mediaQueryList, listener: listener
 
-  Template.registerHelper 'screensize', (screensize) ->
-    Session.equals 'screensize', screensize
+  Template.registerHelper 'screensize', (screensizes) ->
+    screensizes.split(',').some (screensize) ->
+      Session.equals 'screensize', screensize.trim()
